@@ -9,6 +9,7 @@ const Admin = () => {
     const [threshold, setThreshold] = useState('');
     const [endTime, setEndTime] = useState('');
     const [resolveId, setResolveId] = useState('');
+    const [manualResult, setManualResult] = useState('YES');
     const [activeMarkets, setActiveMarkets] = useState([]);
     
     const navigate = useNavigate();
@@ -45,7 +46,7 @@ const Admin = () => {
             return;
         }
         try {
-            await resolvePrediction(resolveId);
+            await resolvePrediction(resolveId, manualResult);
             alert('Market resolved successfully!');
             navigate('/'); // go to homepage to see result
         } catch (error) {
@@ -125,6 +126,16 @@ const Admin = () => {
                                         ))}
                                     </select>
                                 </div>
+                                
+                                {activeMarkets.find(m => m.id === resolveId)?.category === 'sports' && (
+                                    <div className="col-span-6 sm:col-span-4 mt-2">
+                                        <label className="block text-sm font-medium text-gray-700 text-purple-600">Manual Result (Sports Only Override)</label>
+                                        <select value={manualResult} onChange={e => setManualResult(e.target.value)} className="mt-1 block w-full bg-white border border-purple-300 rounded-md shadow-sm py-2 px-3 focus:ring-purple-500 focus:border-purple-500 sm:text-sm">
+                                            <option value="YES">YES (It Happened)</option>
+                                            <option value="NO">NO (It Did Not Happen)</option>
+                                        </select>
+                                    </div>
+                                )}
                             </div>
                             <div className="mt-6 flex justify-end">
                                 <button type="submit" className="bg-red-600 border border-transparent rounded-md shadow-sm py-2 px-4 inline-flex justify-center text-sm font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 text-center items-center">

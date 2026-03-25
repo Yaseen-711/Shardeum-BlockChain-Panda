@@ -62,7 +62,7 @@ router.post('/bets', (req, res) => {
 
 // POST /resolve
 router.post('/resolve', async (req, res) => {
-    const { predictionId } = req.body;
+    const { predictionId, manualResult } = req.body;
     const market = markets.find(p => p.id === predictionId);
     
     if (market) {
@@ -91,8 +91,11 @@ router.post('/resolve', async (req, res) => {
                 } else {
                     market.result = 'NO';
                 }
+            } else if (market.category === 'sports' && manualResult) {
+                console.log(`Manual override provided for sports: ${manualResult}`);
+                market.result = manualResult;
             } else {
-                // Mock fallback for non-finance categories for the Hackathon demo
+                // Mock fallback for anything else for the Hackathon demo
                 market.result = 'YES';
             }
         } catch (oracleError) {

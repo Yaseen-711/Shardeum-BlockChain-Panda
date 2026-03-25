@@ -26,8 +26,8 @@ export const placeBet = async (data) => {
     return response.data;
 };
 
-export const resolvePrediction = async (predictionId) => {
-    const response = await api.post('/resolve', { predictionId });
+export const resolvePrediction = async (predictionId, manualResult) => {
+    const response = await api.post('/resolve', { predictionId, manualResult });
     return response.data;
 };
 
