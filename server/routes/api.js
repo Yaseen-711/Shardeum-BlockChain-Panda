@@ -8,6 +8,7 @@ let markets = [
         id: "seed-btc-1",
         question: "Will Bitcoin hit $100k by end of year?",
         category: "finance",
+        predictionType: "yes_no",
         threshold: 100000,
         endTime: new Date(Date.now() + 86400000 * 30).toISOString(),
         status: "active",
@@ -43,9 +44,9 @@ router.get('/markets', (req, res) => {
 
 // POST /markets
 router.post('/markets', (req, res) => {
-    const { question, category, threshold, endTime } = req.body;
+    const { question, category, predictionType, threshold, endTime } = req.body;
     const newMarket = {
-        id: generateId(), question, category, threshold: Number(threshold), endTime, status: 'active', result: null
+        id: generateId(), question, category, predictionType: predictionType || 'yes_no', threshold: Number(threshold), endTime, status: 'active', result: null
     };
     markets.push(newMarket);
     res.status(201).json(newMarket);

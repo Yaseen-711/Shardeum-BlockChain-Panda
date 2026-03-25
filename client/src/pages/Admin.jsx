@@ -5,6 +5,7 @@ import { createPrediction, resolvePrediction, getPredictions } from '../utils/ap
 const Admin = () => {
     const [question, setQuestion] = useState('');
     const [category, setCategory] = useState('finance');
+    const [predictionType, setPredictionType] = useState('yes_no');
     const [threshold, setThreshold] = useState('');
     const [endTime, setEndTime] = useState('');
     const [resolveId, setResolveId] = useState('');
@@ -28,7 +29,7 @@ const Admin = () => {
     const handleCreate = async (e) => {
         e.preventDefault();
         try {
-            await createPrediction({ question, category, threshold, endTime });
+            await createPrediction({ question, category, predictionType, threshold, endTime });
             alert('Prediction created successfully!');
             navigate('/'); // instantly go to homepage to see it
         } catch (error) {
@@ -79,6 +80,13 @@ const Admin = () => {
                                     </select>
                                 </div>
                                 <div className="col-span-6 sm:col-span-3">
+                                    <label className="block text-sm font-medium text-gray-700">Prediction Type</label>
+                                    <select value={predictionType} onChange={e => setPredictionType(e.target.value)} className="mt-1 block w-full bg-white border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                                        <option value="yes_no">Yes / No (Users vote YES or NO)</option>
+                                        <option value="number">Number (Users predict a target value)</option>
+                                    </select>
+                                </div>
+                                <div className="col-span-6 sm:col-span-3">
                                     <label className="block text-sm font-medium text-gray-700">Threshold / Target Number</label>
                                     <input type="number" step="any" required value={threshold} onChange={e => setThreshold(e.target.value)} className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" placeholder="e.g. 4000" />
                                 </div>
@@ -120,7 +128,7 @@ const Admin = () => {
                             </div>
                             <div className="mt-6 flex justify-end">
                                 <button type="submit" className="bg-red-600 border border-transparent rounded-md shadow-sm py-2 px-4 inline-flex justify-center text-sm font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 text-center items-center">
-                                    Simulate Oracle & Close Market
+                                    Simulate Oracle &amp; Close Market
                                 </button>
                             </div>
                         </form>
