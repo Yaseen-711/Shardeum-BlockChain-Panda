@@ -75,7 +75,8 @@ const PredictionDetail = ({ walletAddress }) => {
     if (loading) return <div className="text-center py-10">Loading market...</div>;
     if (!prediction) return <div className="text-center py-10">Market not found.</div>;
 
-    const isActive = prediction.status === 'active';
+    const isExpired = new Date() > new Date(prediction.endTime);
+    const isActive = prediction.status === 'active' && !isExpired;
 
     return (
         <div className="max-w-3xl mx-auto">
@@ -90,7 +91,7 @@ const PredictionDetail = ({ walletAddress }) => {
                         </p>
                     </div>
                     <span className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-bold ring-1 ring-inset ${isActive ? 'bg-fuchsia-100 text-fuchsia-800 dark:bg-fuchsia-900/30 dark:text-fuchsia-300 ring-fuchsia-500/20 dark:ring-fuchsia-400/20' : 'bg-gray-100 text-gray-800 dark:bg-gray-800/50 dark:text-gray-400 ring-gray-500/20 dark:ring-gray-400/20'}`}>
-                        {prediction.status}
+                        {prediction.status === 'active' && isExpired ? 'resolving...' : prediction.status}
                     </span>
                 </div>
                 

@@ -7,7 +7,8 @@ const PredictionCard = ({ prediction, walletAddress, onBetPlaced }) => {
     const [betAmount, setBetAmount] = useState('');
     const [predictedValue, setPredictedValue] = useState('');
     const [isBetting, setIsBetting] = useState(false);
-    const isActive = prediction.status === 'active';
+    const isExpired = new Date() > new Date(prediction.endTime);
+    const isActive = prediction.status === 'active' && !isExpired;
     const isNumberType = prediction.predictionType === 'number';
 
     const handleQuickBet = async (choice) => {
@@ -58,7 +59,7 @@ const PredictionCard = ({ prediction, walletAddress, onBetPlaced }) => {
                             {isNumberType ? '🔢 Number' : '✋ Yes/No'}
                         </span>
                         <span className={`inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold ring-1 ring-inset ${isActive ? 'bg-fuchsia-100 text-fuchsia-800 dark:bg-fuchsia-900/30 dark:text-fuchsia-300 ring-fuchsia-500/20 dark:ring-fuchsia-400/20' : 'bg-gray-100 text-gray-800 dark:bg-gray-800/50 dark:text-gray-400 ring-gray-500/20 dark:ring-gray-400/20'}`}>
-                            {prediction.status}
+                            {prediction.status === 'active' && isExpired ? 'resolving...' : prediction.status}
                         </span>
                     </div>
                 </div>
