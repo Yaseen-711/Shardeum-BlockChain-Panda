@@ -138,7 +138,7 @@ const Admin = () => {
                                 )}
                             </div>
                             <div className="mt-6 flex justify-end">
-                                <button type="submit" className="bg-gradient-to-r from-rose-500 to-rose-600 border border-transparent rounded-lg shadow-sm py-2.5 px-5 inline-flex justify-center text-sm font-bold text-white hover:from-rose-600 hover:to-rose-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-rose-500 dark:focus:ring-offset-gray-900 transition-all transform hover:scale-[1.02] text-center items-center">
+                                <button type="submit" className="bg-gradient-to-r from-fuchsia-500 to-purple-600 border border-transparent rounded-lg shadow-sm py-2.5 px-5 inline-flex justify-center text-sm font-bold text-white hover:from-fuchsia-600 hover:to-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-fuchsia-500 dark:focus:ring-offset-gray-900 transition-all transform hover:scale-[1.02] text-center items-center">
                                     🔥 Simulate Oracle &amp; Close Market
                                 </button>
                             </div>

@@ -50,14 +50,14 @@ const PredictionCard = ({ prediction, walletAddress, onBetPlaced }) => {
         <div className="bg-white/70 dark:bg-gray-800/70 backdrop-blur-md overflow-hidden shadow-lg shadow-indigo-100/20 dark:shadow-none rounded-2xl border border-white/50 dark:border-gray-700/50 hover:shadow-xl hover:border-indigo-200 dark:hover:border-indigo-500/30 transition-all duration-300 flex flex-col justify-between group">
             <div className="px-5 py-6 sm:p-6">
                 <div className="flex items-center justify-between mb-4">
-                    <span className="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold bg-blue-100 text-blue-800 dark:bg-blue-900/40 dark:text-blue-300 capitalize ring-1 ring-inset ring-blue-500/10 dark:ring-blue-400/20">
+                    <span className="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold bg-indigo-100 text-indigo-800 dark:bg-indigo-900/30 dark:text-indigo-300 capitalize ring-1 ring-inset ring-indigo-500/20 dark:ring-indigo-400/20">
                         {prediction.category}
                     </span>
                     <div className="flex gap-2">
-                        <span className={`inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold ring-1 ring-inset ${isNumberType ? 'bg-purple-100 text-purple-800 dark:bg-purple-900/40 dark:text-purple-300 ring-purple-500/10 dark:ring-purple-400/20' : 'bg-amber-100 text-amber-800 dark:bg-amber-900/40 dark:text-amber-300 ring-amber-500/10 dark:ring-amber-400/20'}`}>
+                        <span className={`inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold ring-1 ring-inset ${isNumberType ? 'bg-purple-100 text-purple-800 dark:bg-purple-900/40 dark:text-purple-300 ring-purple-500/20 dark:ring-purple-400/20' : 'bg-purple-100 text-purple-800 dark:bg-purple-900/30 dark:text-purple-300 ring-purple-500/20 dark:ring-purple-400/20'}`}>
                             {isNumberType ? '🔢 Number' : '✋ Yes/No'}
                         </span>
-                        <span className={`inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold ring-1 ring-inset ${isActive ? 'bg-emerald-100 text-emerald-800 dark:bg-emerald-900/40 dark:text-emerald-300 ring-emerald-500/10 dark:ring-emerald-400/20' : 'bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-300 ring-gray-500/10 dark:ring-gray-400/20'}`}>
+                        <span className={`inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold ring-1 ring-inset ${isActive ? 'bg-fuchsia-100 text-fuchsia-800 dark:bg-fuchsia-900/30 dark:text-fuchsia-300 ring-fuchsia-500/20 dark:ring-fuchsia-400/20' : 'bg-gray-100 text-gray-800 dark:bg-gray-800/50 dark:text-gray-400 ring-gray-500/20 dark:ring-gray-400/20'}`}>
                             {prediction.status}
                         </span>
                     </div>
@@ -77,18 +77,18 @@ const PredictionCard = ({ prediction, walletAddress, onBetPlaced }) => {
                         <div className="relative pt-1">
                             <div className="flex mb-2 items-center justify-between">
                                 <div>
-                                    <span className="text-xs font-bold inline-block text-emerald-600 dark:text-emerald-400">
+                                    <span className="text-xs font-bold inline-block text-indigo-600 dark:text-indigo-400">
                                         YES Pool: {prediction.totalYesAmount} SHM
                                     </span>
                                 </div>
                                 <div className="text-right">
-                                    <span className="text-xs font-bold inline-block text-rose-600 dark:text-rose-400">
+                                    <span className="text-xs font-bold inline-block text-fuchsia-600 dark:text-fuchsia-400">
                                         NO Pool: {prediction.totalNoAmount} SHM
                                     </span>
                                 </div>
                             </div>
-                            <div className="overflow-hidden h-2 mb-4 text-xs flex rounded-full bg-rose-200 dark:bg-rose-900/40">
-                                <div style={{ width: `${prediction.yesPercentage || 50}%` }} className="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-emerald-500 dark:bg-emerald-500/80 transition-all duration-500"></div>
+                            <div className="overflow-hidden h-2 mb-4 text-xs flex rounded-full bg-fuchsia-100 dark:bg-fuchsia-900/30">
+                                <div style={{ width: `${prediction.yesPercentage || 50}%` }} className="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-indigo-500 dark:bg-indigo-500/80 transition-all duration-500"></div>
                             </div>
                         </div>
                     </div>
@@ -132,7 +132,7 @@ const PredictionCard = ({ prediction, walletAddress, onBetPlaced }) => {
                                 <button
                                     onClick={() => handleQuickBet(predictedValue)}
                                     disabled={isBetting}
-                                    className="w-full inline-flex justify-center py-2.5 px-4 border border-transparent shadow-sm text-sm font-bold rounded-lg text-white bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 disabled:opacity-50 transition-all transform hover:scale-[1.02]"
+                                    className="w-full inline-flex justify-center py-2.5 px-4 border border-transparent shadow-sm text-sm font-bold rounded-lg text-white bg-gradient-to-r from-purple-500 to-purple-600 hover:from-purple-600 hover:to-purple-700 disabled:opacity-50 transition-all transform hover:scale-[1.02]"
                                 >
                                     {isBetting ? 'Placing...' : '🔢 Place Prediction'}
                                 </button>
@@ -143,14 +143,14 @@ const PredictionCard = ({ prediction, walletAddress, onBetPlaced }) => {
                                 <button
                                     onClick={() => handleQuickBet('YES')}
                                     disabled={isBetting}
-                                    className="w-full inline-flex justify-center py-2.5 px-4 border border-transparent shadow-sm text-sm font-bold rounded-lg text-white bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 disabled:opacity-50 transition-all transform hover:scale-[1.02]"
+                                    className="w-full inline-flex justify-center py-2.5 px-4 border border-transparent shadow-sm shadow-indigo-500/20 text-sm font-bold rounded-lg text-white bg-gradient-to-r from-indigo-500 to-indigo-600 hover:from-indigo-600 hover:to-indigo-700 disabled:opacity-50 transition-all transform hover:scale-[1.02]"
                                 >
                                     {isBetting ? '...' : 'Vote YES'}
                                 </button>
                                 <button
                                     onClick={() => handleQuickBet('NO')}
                                     disabled={isBetting}
-                                    className="w-full inline-flex justify-center py-2.5 px-4 border border-transparent shadow-sm text-sm font-bold rounded-lg text-white bg-gradient-to-r from-rose-500 to-rose-600 hover:from-rose-600 hover:to-rose-700 disabled:opacity-50 transition-all transform hover:scale-[1.02]"
+                                    className="w-full inline-flex justify-center py-2.5 px-4 border border-transparent shadow-sm shadow-fuchsia-500/20 text-sm font-bold rounded-lg text-white bg-gradient-to-r from-fuchsia-500 to-fuchsia-600 hover:from-fuchsia-600 hover:to-fuchsia-700 disabled:opacity-50 transition-all transform hover:scale-[1.02]"
                                 >
                                     {isBetting ? '...' : 'Vote NO'}
                                 </button>
@@ -159,7 +159,7 @@ const PredictionCard = ({ prediction, walletAddress, onBetPlaced }) => {
                     </div>
                 ) : (
                      <div className="mt-5 bg-gray-50 dark:bg-gray-900/40 border border-gray-100 dark:border-gray-800/60 p-3.5 rounded-xl text-center text-sm font-bold text-gray-700 dark:text-gray-300">
-                        Result: <span className={prediction.result === 'YES' ? 'text-emerald-600 dark:text-emerald-400' : prediction.result === 'NO' ? 'text-rose-600 dark:text-rose-400' : 'text-indigo-600 dark:text-indigo-400'}>{prediction.result || 'Pending'}</span>
+                        Result: <span className={prediction.result === 'YES' ? 'text-indigo-600 dark:text-indigo-400' : prediction.result === 'NO' ? 'text-fuchsia-600 dark:text-fuchsia-400' : 'text-purple-600 dark:text-purple-400'}>{prediction.result || 'Pending'}</span>
                      </div>
                 )}
             </div>

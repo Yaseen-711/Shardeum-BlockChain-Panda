@@ -26,7 +26,7 @@ const Home = ({ walletAddress }) => {
     return (
         <div>
             <div className="mb-6">
-                <h1 className="text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-gray-900 to-gray-600 dark:from-white dark:to-gray-300 tracking-tight">Active Markets</h1>
+                <h1 className="text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-indigo-700 to-purple-700 dark:from-indigo-300 dark:to-purple-300 tracking-tight">Active Markets</h1>
                 <p className="mt-2 text-sm text-gray-600 dark:text-gray-400 font-medium">
                     Predict outcomes on finance, weather, and sports.
                 </p>
