@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom';
 
-const Navbar = ({ walletAddress, onConnect, onLogout, isDarkMode, toggleDarkMode }) => {
-    const userEmail = localStorage.getItem('userEmail');
+const Navbar = ({ walletAddress, onConnect, isDarkMode, toggleDarkMode }) => {
 
     return (
         <nav className="bg-white/80 dark:bg-gray-900/80 backdrop-blur-md shadow-sm border-b border-gray-200 dark:border-gray-800 transition-colors duration-300">
@@ -21,7 +20,6 @@ const Navbar = ({ walletAddress, onConnect, onLogout, isDarkMode, toggleDarkMode
                         </div>
                     </div>
                     <div className="flex items-center space-x-3 sm:space-x-4">
-                        {userEmail && <span className="text-sm text-gray-500 dark:text-gray-400 hidden sm:block font-medium">{userEmail}</span>}
                         {walletAddress ? (
                             <div className="px-3 py-1.5 sm:px-4 sm:py-2 bg-indigo-50 dark:bg-indigo-900/40 rounded-full text-xs sm:text-sm font-medium text-indigo-700 dark:text-indigo-300 border border-indigo-100 dark:border-indigo-800 transition-colors">
                                 {walletAddress.slice(0, 6)}...{walletAddress.slice(-4)}
@@ -40,12 +38,6 @@ const Navbar = ({ walletAddress, onConnect, onLogout, isDarkMode, toggleDarkMode
                             aria-label="Toggle Dark Mode"
                         >
                             {isDarkMode ? '☀️' : '🌙'}
-                        </button>
-                        <button
-                            onClick={onLogout}
-                            className="text-xs sm:text-sm font-medium text-red-500 hover:text-red-700 dark:text-red-400 dark:hover:text-red-300 transition-colors"
-                        >
-                            Logout
                         </button>
                     </div>
                 </div>
