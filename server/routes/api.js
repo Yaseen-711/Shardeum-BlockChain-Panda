@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const { ethers } = require('ethers');
+const axios = require('axios');
 
 let markets = [
     {
@@ -65,7 +66,40 @@ router.post('/resolve', async (req, res) => {
     
     if (market) {
         market.status = 'resolved';
-        market.result = 'YES'; // Mock resolution decision for demo
+        
+        // === REAL ORACLE LOGIC ===
+        try {
+            console.log(`Resolving oracle for category: ${market.category}`);
+            if (market.category === 'finance') {
+                const questionLower = market.question.toLowerCase();
+                let coinId = 'bitcoin'; // Default fallback
+                if (questionLower.includes('ethereum') || questionLower.includes('eth')) {
+                    coinId = 'ethereum';
+                } else if (questionLower.includes('solana') || questionLower.includes('sol')) {
+                    coinId = 'solana';
+                }
+
+                console.log(`Fetching price for ${coinId}...`);
+                const response = await axios.get(`${process.env.COINGECKO_API}/simple/price?ids=${coinId}&vs_currencies=usd`);
+                const currentPrice = response.data[coinId].usd;
+                
+                console.log(`Live ${coinId} price: $${currentPrice} | Target Threshold: $${market.threshold}`);
+                
+                if (currentPrice >= Number(market.threshold)) {
+                    market.result = 'YES';
+                } else {
+                    market.result = 'NO';
+                }
+            } else {
+                // Mock fallback for non-finance categories for the Hackathon demo
+                market.result = 'YES';
+            }
+        } catch (oracleError) {
+            console.error("Oracle fetch error, defaulting to YES for demo:", oracleError.message);
+            market.result = 'YES';
+        }
+        
+        console.log(`Market resolved mathematically to: ${market.result}`);
         
         // === PAYOUT LOGIC ===
         try {
