@@ -47,48 +47,48 @@ const PredictionCard = ({ prediction, walletAddress, onBetPlaced }) => {
     };
 
     return (
-        <div className="bg-white overflow-hidden shadow rounded-lg hover:shadow-md transition-shadow flex flex-col justify-between">
-            <div className="px-4 py-5 sm:p-6">
-                <div className="flex items-center justify-between">
-                    <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800 capitalize">
+        <div className="bg-white/70 dark:bg-gray-800/70 backdrop-blur-md overflow-hidden shadow-lg shadow-indigo-100/20 dark:shadow-none rounded-2xl border border-white/50 dark:border-gray-700/50 hover:shadow-xl hover:border-indigo-200 dark:hover:border-indigo-500/30 transition-all duration-300 flex flex-col justify-between group">
+            <div className="px-5 py-6 sm:p-6">
+                <div className="flex items-center justify-between mb-4">
+                    <span className="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold bg-blue-100 text-blue-800 dark:bg-blue-900/40 dark:text-blue-300 capitalize ring-1 ring-inset ring-blue-500/10 dark:ring-blue-400/20">
                         {prediction.category}
                     </span>
                     <div className="flex gap-2">
-                        <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${isNumberType ? 'bg-purple-100 text-purple-800' : 'bg-yellow-100 text-yellow-800'}`}>
+                        <span className={`inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold ring-1 ring-inset ${isNumberType ? 'bg-purple-100 text-purple-800 dark:bg-purple-900/40 dark:text-purple-300 ring-purple-500/10 dark:ring-purple-400/20' : 'bg-amber-100 text-amber-800 dark:bg-amber-900/40 dark:text-amber-300 ring-amber-500/10 dark:ring-amber-400/20'}`}>
                             {isNumberType ? '🔢 Number' : '✋ Yes/No'}
                         </span>
-                        <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${isActive ? 'bg-green-100 text-green-800' : 'bg-gray-100 text-gray-800'}`}>
+                        <span className={`inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold ring-1 ring-inset ${isActive ? 'bg-emerald-100 text-emerald-800 dark:bg-emerald-900/40 dark:text-emerald-300 ring-emerald-500/10 dark:ring-emerald-400/20' : 'bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-300 ring-gray-500/10 dark:ring-gray-400/20'}`}>
                             {prediction.status}
                         </span>
                     </div>
                 </div>
-                <div className="mt-4">
-                    <h3 className="text-lg leading-6 font-medium text-gray-900">
+                <div>
+                    <h3 className="text-lg leading-6 font-bold text-gray-900 dark:text-gray-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">
                         {prediction.question}
                     </h3>
-                    <p className="mt-1 max-w-2xl text-sm text-gray-500">
-                        Ends: {new Date(prediction.endTime).toLocaleString()}
+                    <p className="mt-1 text-sm text-gray-500 dark:text-gray-400 font-medium">
+                        Ends: <span className="text-gray-700 dark:text-gray-300">{new Date(prediction.endTime).toLocaleString()}</span>
                     </p>
                 </div>
 
                 {/* Pool Stats - only show for yes_no type */}
                 {!isNumberType && (
-                    <div className="mt-4">
+                    <div className="mt-5">
                         <div className="relative pt-1">
                             <div className="flex mb-2 items-center justify-between">
                                 <div>
-                                    <span className="text-xs font-semibold inline-block text-green-600">
+                                    <span className="text-xs font-bold inline-block text-emerald-600 dark:text-emerald-400">
                                         YES Pool: {prediction.totalYesAmount} SHM
                                     </span>
                                 </div>
                                 <div className="text-right">
-                                    <span className="text-xs font-semibold inline-block text-red-600">
+                                    <span className="text-xs font-bold inline-block text-rose-600 dark:text-rose-400">
                                         NO Pool: {prediction.totalNoAmount} SHM
                                     </span>
                                 </div>
                             </div>
-                            <div className="overflow-hidden h-2 mb-4 text-xs flex rounded bg-red-200">
-                                <div style={{ width: `${prediction.yesPercentage || 50}%` }} className="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-green-500"></div>
+                            <div className="overflow-hidden h-2 mb-4 text-xs flex rounded-full bg-rose-200 dark:bg-rose-900/40">
+                                <div style={{ width: `${prediction.yesPercentage || 50}%` }} className="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-emerald-500 dark:bg-emerald-500/80 transition-all duration-500"></div>
                             </div>
                         </div>
                     </div>
@@ -96,24 +96,24 @@ const PredictionCard = ({ prediction, walletAddress, onBetPlaced }) => {
 
                 {/* Number type pool info */}
                 {isNumberType && (
-                    <div className="mt-4 bg-purple-50 p-3 rounded-md">
-                        <p className="text-sm text-purple-700 font-medium">
-                            Target threshold: <span className="font-bold">{prediction.threshold}</span>
+                    <div className="mt-5 bg-purple-50 dark:bg-purple-900/20 p-3.5 rounded-xl border border-purple-100 dark:border-purple-800/30">
+                        <p className="text-sm text-purple-700 dark:text-purple-300 font-medium">
+                            Target threshold: <span className="font-bold text-purple-900 dark:text-purple-100">{prediction.threshold}</span>
                         </p>
-                        <p className="text-xs text-purple-500 mt-1">
+                        <p className="text-xs text-purple-500 dark:text-purple-400/80 mt-1.5">
                             Enter your predicted value and bet amount below.
                         </p>
                     </div>
                 )}
 
                 {isActive ? (
-                    <div className="mt-4 border-t border-gray-100 pt-4">
+                    <div className="mt-5 border-t border-gray-100 dark:border-gray-700/50 pt-5">
                         <input
                             type="number"
                             placeholder="Amount in SHM"
                             value={betAmount}
                             onChange={(e) => setBetAmount(e.target.value)}
-                            className="w-full text-sm border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 py-2 px-3 border mb-3"
+                            className="w-full text-sm border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white dark:placeholder-gray-400 rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500 py-2.5 px-3 border mb-3 transition-colors"
                             disabled={isBetting}
                         />
                         
@@ -126,13 +126,13 @@ const PredictionCard = ({ prediction, walletAddress, onBetPlaced }) => {
                                     placeholder="Your predicted value (e.g. 95000)"
                                     value={predictedValue}
                                     onChange={(e) => setPredictedValue(e.target.value)}
-                                    className="w-full text-sm border-gray-300 rounded-md shadow-sm focus:ring-purple-500 focus:border-purple-500 py-2 px-3 border mb-3"
+                                    className="w-full text-sm border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white dark:placeholder-gray-400 rounded-lg shadow-sm focus:ring-purple-500 focus:border-purple-500 py-2.5 px-3 border mb-3 transition-colors"
                                     disabled={isBetting}
                                 />
                                 <button
                                     onClick={() => handleQuickBet(predictedValue)}
                                     disabled={isBetting}
-                                    className="w-full inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-purple-600 hover:bg-purple-700 disabled:opacity-50"
+                                    className="w-full inline-flex justify-center py-2.5 px-4 border border-transparent shadow-sm text-sm font-bold rounded-lg text-white bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 disabled:opacity-50 transition-all transform hover:scale-[1.02]"
                                 >
                                     {isBetting ? 'Placing...' : '🔢 Place Prediction'}
                                 </button>
@@ -143,14 +143,14 @@ const PredictionCard = ({ prediction, walletAddress, onBetPlaced }) => {
                                 <button
                                     onClick={() => handleQuickBet('YES')}
                                     disabled={isBetting}
-                                    className="w-full inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700 disabled:opacity-50"
+                                    className="w-full inline-flex justify-center py-2.5 px-4 border border-transparent shadow-sm text-sm font-bold rounded-lg text-white bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 disabled:opacity-50 transition-all transform hover:scale-[1.02]"
                                 >
                                     {isBetting ? '...' : 'Vote YES'}
                                 </button>
                                 <button
                                     onClick={() => handleQuickBet('NO')}
                                     disabled={isBetting}
-                                    className="w-full inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-700 disabled:opacity-50"
+                                    className="w-full inline-flex justify-center py-2.5 px-4 border border-transparent shadow-sm text-sm font-bold rounded-lg text-white bg-gradient-to-r from-rose-500 to-rose-600 hover:from-rose-600 hover:to-rose-700 disabled:opacity-50 transition-all transform hover:scale-[1.02]"
                                 >
                                     {isBetting ? '...' : 'Vote NO'}
                                 </button>
@@ -158,17 +158,17 @@ const PredictionCard = ({ prediction, walletAddress, onBetPlaced }) => {
                         )}
                     </div>
                 ) : (
-                     <div className="mt-4 bg-gray-50 p-3 rounded-md text-center text-sm font-medium text-gray-700">
-                        Result: {prediction.result || 'Pending'}
+                     <div className="mt-5 bg-gray-50 dark:bg-gray-900/40 border border-gray-100 dark:border-gray-800/60 p-3.5 rounded-xl text-center text-sm font-bold text-gray-700 dark:text-gray-300">
+                        Result: <span className={prediction.result === 'YES' ? 'text-emerald-600 dark:text-emerald-400' : prediction.result === 'NO' ? 'text-rose-600 dark:text-rose-400' : 'text-indigo-600 dark:text-indigo-400'}>{prediction.result || 'Pending'}</span>
                      </div>
                 )}
             </div>
-            <div className="bg-gray-50 px-4 py-3 sm:px-6">
+            <div className="bg-gray-50/50 dark:bg-gray-800/40 border-t border-gray-100 dark:border-gray-700/50 px-5 py-3.5 sm:px-6">
                 <Link
                     to={`/prediction/${prediction.id}`}
-                    className="text-sm font-medium text-indigo-600 hover:text-indigo-500"
+                    className="text-sm font-bold text-indigo-600 dark:text-indigo-400 hover:text-indigo-800 dark:hover:text-indigo-300 flex items-center gap-1 transition-colors"
                 >
-                    View Details &rarr;
+                    View Details <span aria-hidden="true">&rarr;</span>
                 </Link>
             </div>
         </div>

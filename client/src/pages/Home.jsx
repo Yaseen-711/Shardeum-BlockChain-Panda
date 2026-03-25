@@ -26,14 +26,14 @@ const Home = ({ walletAddress }) => {
     return (
         <div>
             <div className="mb-6">
-                <h1 className="text-3xl font-bold text-gray-900">Active Markets</h1>
-                <p className="mt-2 text-sm text-gray-600">
+                <h1 className="text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-gray-900 to-gray-600 dark:from-white dark:to-gray-300 tracking-tight">Active Markets</h1>
+                <p className="mt-2 text-sm text-gray-600 dark:text-gray-400 font-medium">
                     Predict outcomes on finance, weather, and sports.
                 </p>
             </div>
             
             {predictions.length === 0 ? (
-                <div className="bg-white shadow rounded-lg p-6 text-center text-gray-500">
+                <div className="bg-white/60 dark:bg-gray-800/60 backdrop-blur-md shadow-sm border border-gray-200 dark:border-gray-700 rounded-xl p-8 text-center text-gray-500 dark:text-gray-400">
                     No active markets found. Check back later!
                 </div>
             ) : (
